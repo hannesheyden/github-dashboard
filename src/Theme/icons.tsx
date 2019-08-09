@@ -8,6 +8,7 @@ import {
   faCheckDouble,
   faExclamationCircle,
   faArrowCircleLeft,
+  faArrowCircleRight,
   faCircle,
   faSearch,
   faSpinner
@@ -22,6 +23,7 @@ library.add(
   faCheckDouble,
   faExclamationCircle,
   faArrowCircleLeft,
+  faArrowCircleRight,
   faCircle,
   faSearch,
   faSpinner

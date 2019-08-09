@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { useQuery } from 'react-apollo-hooks';
+import { useQuery } from '@apollo/react-hooks';
 
 import { CURRENT_USER } from '../Queries/User';
 import { currentUser } from '../Queries/__generated__/currentUser';
@@ -22,7 +22,9 @@ interface CurrentUserContextInterface {
   setSelectedOrgs(orgs: string[]): void;
 }
 
-const CurrentUserContext = React.createContext<CurrentUserContextInterface | undefined>(undefined);
+const CurrentUserContext = React.createContext<
+  CurrentUserContextInterface | undefined
+>(undefined);
 
 interface CurrentUserProviderPros {
   value?: CurrentUserContextInterface;
@@ -30,11 +32,11 @@ interface CurrentUserProviderPros {
 }
 
 const CurrentUserProvider = (props: CurrentUserProviderPros) => {
-  const { data } = useQuery<currentUser>(CURRENT_USER, { suspend: true });
+  const { data, loading, error } = useQuery<currentUser>(CURRENT_USER);
   const [selectedOrganizations, setSelectedOrgs] = useState<string[]>([]);
 
-  if (!data) {
-    return <CurrentUserProvider value={undefined} {...props} />;
+  if (loading) {
+    return null;
   }
 
   const {
@@ -58,7 +60,16 @@ const CurrentUserProvider = (props: CurrentUserProviderPros) => {
     });
   }
 
-  return <CurrentUserContext.Provider value={{ user: { avatarUrl, name, login, organizations: orgs }, selectedOrganizations, setSelectedOrgs }} {...props} />;
+  return (
+    <CurrentUserContext.Provider
+      value={{
+        user: { avatarUrl, name, login, organizations: orgs },
+        selectedOrganizations,
+        setSelectedOrgs
+      }}
+      {...props}
+    />
+  );
 };
 
 const useCurrentUser = () => {
@@ -78,7 +89,13 @@ const useCurrentUser = () => {
     setSelectedOrgs(selectedOrganizations.filter(org => org !== name));
   };
 
-  return { user: context.user, selectedOrganizations, setInitialOrganizations: setSelectedOrgs, selectOrganization: selectOrg, deselectOrganization: deSelectOrg };
+  return {
+    user: context.user,
+    selectedOrganizations,
+    setInitialOrganizations: setSelectedOrgs,
+    selectOrganization: selectOrg,
+    deselectOrganization: deSelectOrg
+  };
 };
 
 export { useCurrentUser, CurrentUserProvider };

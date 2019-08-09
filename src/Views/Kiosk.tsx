@@ -6,8 +6,7 @@ import { latestPrs, latestPrsVariables } from './__generated__/latestPrs';
 import gql from 'graphql-tag';
 
 import styled from '../Theme/styled-components';
-import { useApolloClient } from 'react-apollo-hooks';
-import { node } from 'prop-types';
+import { useApolloClient } from '@apollo/react-hooks';
 import Spinner from '../Components/Ui/Spinner';
 
 const PRWrapper = styled.div`
