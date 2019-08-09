@@ -4,6 +4,7 @@ import styled from '../Theme/styled-components';
 import { latestPrs_search_nodes_PullRequest } from '../Views/__generated__/latestPrs';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconName } from '@fortawesome/fontawesome-svg-core';
+import BranchInfo from '../Components/Ui/BranchInfo';
 
 const PullRequestWrapper = styled.div`
   position: relative;
@@ -53,7 +54,6 @@ const Title = styled.h2`
   margin-left: 20px;
   font-size: 20px;
   line-height: 1.5;
-  font-weight: normal;
 `;
 
 const Avatar = styled.img<{ size: number }>`
@@ -72,15 +72,6 @@ const Project = styled.div`
 
   img {
     margin-right: 10px;
-  }
-
-  &:before {
-    content: 'Project:';
-    margin-right: 5px;
-    font-weight: bold;
-    text-transform: uppercase;
-    font-size: 12px;
-    color: #9b9b9b;
   }
 `;
 const Section = styled.div`
@@ -156,17 +147,10 @@ const PullRequestCard: React.FC<
         {props.repository.name}
       </Project>
       <Section>
-        <FontAwesomeIcon
-          style={{ marginRight: '10px' }}
-          icon={['fas', 'code-branch']}
+        <BranchInfo
+          baseRefName={props.baseRefName}
+          headRefName={props.headRefName}
         />
-        {props.baseRefName}{' '}
-        <FontAwesomeIcon
-          style={{ margin: '0 10px' }}
-          icon={['fas', 'arrow-circle-left']}
-        />{' '}
-        {props.headRefName.substring(0, 30)}
-        {props.headRefName.length > 30 && '...'}
       </Section>
       <Section>
         <div

@@ -5,6 +5,7 @@ export interface ColorInterface {
   light: string;
   contrast: string;
   white: string;
+  black: string;
 
   success: string;
   warning: string;
@@ -18,6 +19,7 @@ const colors: ColorInterface = {
   light: '#f4f4f4',
   contrast: '#e8e8e8',
   white: '#ffffff',
+  black: '#000',
 
   success: '#7fd466',
   warning: '#ffd900',

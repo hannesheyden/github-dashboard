@@ -7,6 +7,14 @@
 //==============================================================
 
 /**
+ * The possible states of an issue.
+ */
+export enum IssueState {
+  CLOSED = "CLOSED",
+  OPEN = "OPEN",
+}
+
+/**
  * Detailed status information about a pull request merge.
  */
 export enum MergeStateStatus {

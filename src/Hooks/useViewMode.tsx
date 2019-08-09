@@ -9,14 +9,16 @@ interface ViewContextInterface {
   setMode(mode: ViewMode): void;
 }
 
-const ViewModeContext = createContext<ViewContextInterface | undefined>(undefined);
+const ViewModeContext = createContext<ViewContextInterface | undefined>(
+  undefined
+);
 
 interface ViewModeProviderProps {
   value?: ViewContextInterface;
   children: React.ReactNode;
 }
 const ViewModeProvider = (props: ViewModeProviderProps) => {
-  const [mode, setMode] = useState<ViewMode>('kiosk');
+  const [mode, setMode] = useState<ViewMode>('user');
 
   const value = React.useMemo(() => {
     return {
